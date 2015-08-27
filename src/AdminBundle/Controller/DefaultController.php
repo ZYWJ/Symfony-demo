@@ -30,7 +30,7 @@ class DefaultController extends Controller
     public function validationAction()
     {
         $product = new Product(); 
-        $product->setName('杨坚坚');
+        $product->setName('zywj');
         $product->setPrice("adsf");
 
         $validator = $this->get('validator');
@@ -115,7 +115,7 @@ class DefaultController extends Controller
     public function serviceAction()
     {
         $cpo = $this->get('admin.cpo');
-        $cpo->setStr('yangjianjian');
+        $cpo->setStr('zywj');
 
         return new Response('<html><body><h1> output from service : '. $cpo->getStr() .'</h1></body></htm>');
     }
