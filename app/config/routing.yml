@@ -1,17 +1,17 @@
 app:
     resource: "@AppBundle/Controller/"
     type:     annotation
-    host: yjj.com
+    host: zywj.com
         
 bbs:
     resource: "@BbsBundle/Resources/config/routing.yml"
     prefix:   /bbs
-    host: yjj.com
+    host: zywj.com
 
 assistant:
     resource: "@AssistantBundle/Resources/config/routing.yml"
-    host: my.yjj.com
+    host: my.zywj.com
 
 admin:
     resource: "@AdminBundle/Resources/config/routing.yml"
-    host: admin.yjj.com
+    host: admin.zywj.com
