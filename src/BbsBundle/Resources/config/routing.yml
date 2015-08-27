@@ -1,0 +1,3 @@
+bbs_homepage:
+    path:     /
+    defaults: { _controller: BbsBundle:Default:index }

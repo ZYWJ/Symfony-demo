@@ -1,0 +1,19 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('bundles/admin/css/admin.css') }}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('bundles/admin/js/jquery.js') }}"></script>
+{% endblock %}
+
+{% block body%}
+    Hello {{ name }}!
+
+    <div class="test"></div>
+{% endblock %}

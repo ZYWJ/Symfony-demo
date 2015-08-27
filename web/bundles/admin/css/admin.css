@@ -1,0 +1,20 @@
+.test  {
+    width: 500px;
+    height: 500px;
+    background: url('../img/1.jpg') no-repeat;
+}
+.row {
+    width: 100px;
+    height: 20px;
+    float: left;
+}
+.row2 {
+    width: 150px;
+    height: 20px;
+    float: left;
+}
+.error {
+    width: 200px;
+    height: 20px;
+    float: left;
+}

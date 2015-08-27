@@ -1,0 +1,8 @@
+assistant_homepage:
+    path:     /
+    defaults: { _controller: AssistantBundle:Default:index }
+
+assistant_hello:
+    path:     /hello/{name}
+    defaults: { _controller: AssistantBundle:Default:hello }
+

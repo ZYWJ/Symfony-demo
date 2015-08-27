@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+    {{ page_title }}
+{% endblock %}
+
+
+{% block stylesheets %}
+<link rel="stylesheet" href="{{ asset('bundles/admin/css/admin.css') }}" />
+{% endblock %}
+
+{% block body%}
+    {{ form_start(product_form) }}
+    <div>
+        <div class="row">{{ form_label(product_form.name, '产品名称') }}</div>
+        <div class="row2">{{ form_widget(product_form.name) }}</div>
+        {{ form_errors(product_form.name, {'attr': {'class': 'error'}}) }}
+    </div>
+
+    <div style="clear:both">
+        <div class="row">{{ form_label(product_form.price, '价格') }}</div>
+        <div class="row2">{{ form_widget(product_form.price) }}</div>
+        {{ form_errors(product_form.price, {'attr': {'class': 'error'}}) }}
+    </div>
+
+    <div style="clear:both">
+        {{ form_widget(product_form.save, {'label': '提交'}) }}
+    </div>
+    {{ form_end(product_form) }}
+{% endblock %}
