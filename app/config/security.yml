@@ -44,4 +44,4 @@ security:
     access_control:
         # this is a catch-all for the admin area
         # additional security lives in the controllers
-        - { host: admin.yjj.symfony path: ^/admin, roles: ROLE_ADMIN }
+        - { host: admin.yjj.symfony, path: ^/admin, roles: ROLE_ADMIN }
