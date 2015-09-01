@@ -27,7 +27,7 @@ security:
 
     firewalls:
         admin:
-            host: admin.yjj.com
+            host: %hosts.admin_domain%
             provider: admin_custom_provider
             pattern: ^/
             anonymous: true
@@ -42,7 +42,7 @@ security:
                 target: admin_homepage
 
         app:
-            host: yjj.com
+            host: %hosts.app_domain%
             provider: user_custom_provider
             pattern: ^/
             anonymous: true
@@ -56,8 +56,8 @@ security:
                 path: user_logout
                 target: user_homepage
     access_control:
-        - { host: admin.yjj.com, path: ^/admin, roles: ROLE_ADMIN }
-        - { host: yjj.com, path: ^/admin, roles: ROLE_ADMIN }
+        - { host: %hosts.admin_domain%, path: ^/admin, roles: ROLE_ADMIN }
+        - { host: %hosts.app_domain%, path: ^/admin, roles: ROLE_ADMIN }
 
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER]
