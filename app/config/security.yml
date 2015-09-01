@@ -1,47 +1,63 @@
 # To get started with security, check out the documentation:
 # http://symfony.com/doc/current/book/security.html
+services:
+    cpo.admin_provider:
+        class: AdminBundle\Security\User\AdminProvider
+    cpo.user_provider:
+        class: AppBundle\Security\User\UserProvider
+
 security:
     encoders:
-        Symfony\Component\Security\Core\User\User: plaintext
+        AdminBundle\Security\User\CpoAdmin: 
+            algorithm:           sha512
+            encode_as_base64:    false
+            iterations:          1
+
+        AppBundle\Security\User\CpoUser: 
+            algorithm:           sha512
+            encode_as_base64:    false
+            iterations:          1
 
     # http://symfony.com/doc/current/book/security.html#where-do-users-come-from-user-providers
     providers:
-        in_memory:
-            memory: 
-                users:
-                    yangjj:
-                        password: 123
-                        roles: 'ROLE_ADMIN'
+        admin_custom_provider:
+            id: cpo.admin_provider
+        user_custom_provider:
+            id: cpo.user_provider
 
     firewalls:
-        secured_area:
-            # this firewall applies to all URLs
+        admin:
+            host: admin.yjj.com
+            provider: admin_custom_provider
             pattern: ^/
-
-            # but the firewall does not require login on every page
-            # denying access is done in access_control or in your controllers
             anonymous: true
-
-            # This allows the user to login by submitting a username and password
-            # Reference: http://symfony.com/doc/current/cookbook/security/form_login_setup.html
             form_login:
-                # The route name that the login form submits to
-                check_path: admin_check
-                # The name of the route where the login form lives
-                # When the user tries to access a protected page, they are redirected here
                 login_path: admin_login
-                # Secure the login form against CSRF
-                # Reference: http://symfony.com/doc/current/cookbook/security/csrf_in_login_form.html
+                check_path: admin_check
                 default_target_path: admin_admin
                 csrf_provider: security.csrf.token_manager
 
             logout:
-                # The route name the user can go to in order to logout
                 path: admin_logout
-                # The name of the route to redirect to after logging out
                 target: admin_homepage
 
+        app:
+            host: yjj.com
+            provider: user_custom_provider
+            pattern: ^/
+            anonymous: true
+            form_login:
+                login_path: user_login
+                check_path: user_check
+                default_target_path: user_admin
+                csrf_provider: security.csrf.token_manager
+
+            logout:
+                path: user_logout
+                target: user_homepage
     access_control:
-        # this is a catch-all for the admin area
-        # additional security lives in the controllers
-        - { host: admin.yjj.symfony, path: ^/admin, roles: ROLE_ADMIN }
+        - { host: admin.yjj.com, path: ^/admin, roles: ROLE_ADMIN }
+        - { host: yjj.com, path: ^/admin, roles: ROLE_ADMIN }
+
+    role_hierarchy:
+        ROLE_ADMIN: [ROLE_USER]

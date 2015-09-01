@@ -1,0 +1,7 @@
+# This file is auto-generated during the composer install
+imports: 
+    - { resource: "../parameters.yml" }        
+parameters:
+    hosts.app_domain: yjj.me
+    hosts.my_domin  : my.yjj.me
+    hosts.admin_domain: admin.yjj.me

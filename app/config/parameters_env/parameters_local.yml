@@ -1,0 +1,7 @@
+imports: 
+    - { resource: "../parameters.yml" }        
+
+parameters:
+    hosts.app_domain: yjj.com
+    hosts.my_domain  : my.yjj.com
+    hosts.admin_domain: admin.yjj.com

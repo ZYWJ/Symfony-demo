@@ -11,7 +11,11 @@ class DefaultController extends Controller
 {
     public function indexAction()
     {
-        return new Response('<html><body><h1>Hello, 管理员后台</h1></body></html>'); 
+        //return new Response('<html><body><h1>Hello, 管理员后台</h1></body></html>'); 
+        return $this->render('AdminBundle:Default:index.html.twig', array(
+            'page_title' => '管理员后台',
+            'name'       => 'zywj'
+        ));
     }
 
     public function helloAction($name) 
@@ -77,39 +81,26 @@ class DefaultController extends Controller
 
     public function adminAction()
     {
-        if ($this->getUser()) {
-            foreach ($this->getUser()->getRoles() as $role) {
-                if ($role == "ROLE_ADMIN") {
-                    return $this->render('AdminBundle:Default:admin.html.twig', array(
-                        'username' => $this->getUser()->getUsername(),
-                        'password' => $this->getUser()->getPassword()
-                    ));
-                } 
-            }
+        foreach ($this->getUser()->getRoles() as $role) {
+            if ($role == "ROLE_ADMIN") {
+                return $this->render('AdminBundle:Default:admin.html.twig', array(
+                    'username' => $this->getUser()->getUsername(),
+                    'password' => $this->getUser()->getPassword()
+                ));
+            } 
         }
-
-        return $this->redirectToRoute('admin_login');
     }
 
     public function loginAction()
     {
         $helper = $this->get('security.authentication_utils');
+        dump($helper->getLastAuthenticationError());
         return $this->render('AdminBundle:Default:login.html.twig', array(
             // last username entered by the user (if any)
             'last_username' => $helper->getLastUsername(),
             // last authentication error (if any)
             'error' => $helper->getLastAuthenticationError(),
         ));    
-    }
-
-    public function checkAction()
-    {
-    
-    }
-
-    public function logoutAction()
-    {
-         
     }
 
     public function serviceAction()

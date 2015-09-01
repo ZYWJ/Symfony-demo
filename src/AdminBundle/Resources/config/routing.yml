@@ -33,11 +33,9 @@ admin_login:
 
 admin_check:
     path: /check
-    defaults: { _controller: AdminBundle:Default:check }
 
 admin_logout:
     path: /logout
-    defaults: { _controller: AdminBundle:Default:logout }
 
 admin_service:
     path: /service

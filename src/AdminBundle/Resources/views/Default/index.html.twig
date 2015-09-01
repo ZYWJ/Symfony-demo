@@ -5,15 +5,13 @@
 {% endblock %}
 
 {% block stylesheets %}
-    <link rel="stylesheet" href="{{ asset('bundles/admin/css/admin.css') }}">
-{% endblock %}
-
-{% block javascripts %}
-    <script src="{{ asset('bundles/admin/js/jquery.js') }}"></script>
+    {% stylesheets '@AdminBundle/Resources/public/css/index.css'  output="bundles/admin/css/index.css" %}
+        <link rel="stylesheet" href="{{ asset_url }}">
+    {% endstylesheets %}
 {% endblock %}
 
 {% block body%}
     Hello {{ name }}!
 
-    <div class="test"></div>
+    <div class="t"></div>
 {% endblock %}
