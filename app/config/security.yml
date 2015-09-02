@@ -56,8 +56,14 @@ security:
                 path: user_logout
                 target: user_homepage
     access_control:
-        - { host: %hosts.admin_domain%, path: ^/admin, roles: ROLE_ADMIN }
-        - { host: %hosts.app_domain%, path: ^/admin, roles: ROLE_ADMIN }
-
+        user_login:
+            host: %host.app_domain%
+            path: ^/admin
+            roles: ROLE_ADMIN
+        admin_login:
+            host: %host.app_domain%
+            path: ^/admin
+            roles: ROLE_USER
+            
     role_hierarchy:
         ROLE_ADMIN: [ROLE_USER]
