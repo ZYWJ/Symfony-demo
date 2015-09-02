@@ -24,14 +24,10 @@ class DefaultController extends Controller
      */
     public function adminAction()
     {
-        foreach ($this->getUser()->getRoles() as $role) {
-            if ($role == "ROLE_ADMIN") {
-                return $this->render('AppBundle:Default:admin.html.twig', array(
-                    'username' => $this->getUser()->getUsername(),
-                    'password' => $this->getUser()->getPassword()
-                ));
-            } 
-        }
+        return $this->render('AppBundle:Default:admin.html.twig', array(
+            'username' => $this->getUser()->getUsername(),
+            'password' => $this->getUser()->getPassword()
+        ));
     }
 
     /**
