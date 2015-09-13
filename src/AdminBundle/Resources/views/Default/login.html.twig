@@ -5,21 +5,11 @@
     <div class="col-sm-5">
         <div class="well">
             <form action="{{ path('admin_check') }}" method="post">
-                <fieldset>
-                    <legend><i class="fa fa-lock"></i>登录</legend>
-                    <div class="form-group">
-                        <label for="username">用户名</label>
-                        <input type="text" id="username" name="_username" value="{{ last_username }}" class="form-control"/>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">密码</label>
-                        <input type="password" id="password" name="_password" class="form-control" />
-                    </div>
-                    <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
-                    <button type="submit" class="btn btn-primary">
-                        <i class="fa fa-sign-in"></i> 登录
-                    </button>
-                </fieldset>
+                {{ form_row(login_form.username) }}
+                {{ form_row(login_form.password) }}
+                {{ form_row(login_form.captcha) }}
+                {{ form_row(login_form.submit) }}
+                <input type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}"/>
             </form>
         </div>
     </div>

@@ -24,6 +24,12 @@
     </div>
 
     <div style="clear:both">
+        <div class="row">{{ form_label(product_form.captcha, '验证码') }}</div>
+        <div class="row2">{{ form_widget(product_form.captcha) }}</div>
+        {{ form_errors(product_form.captcha, {'attr': {'class': 'error'}}) }}
+    </div>
+
+    <div style="clear:both">
         {{ form_widget(product_form.save, {'label': '提交'}) }}
     </div>
     {{ form_end(product_form) }}

@@ -6,11 +6,14 @@ use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpFoundation\Request;
 use AdminBundle\Entity\Product;
+use AdminBundle\Entity\Admin;
 
 class DefaultController extends Controller
 {
     public function indexAction()
     {
+        $evd = $this->get('event_dispatcher');
+        dump($evd->getListeners());
         //return new Response('<html><body><h1>Hello, 管理员后台</h1></body></html>'); 
         return $this->render('AdminBundle:Default:index.html.twig', array(
             'page_title' => '管理员后台',
@@ -54,6 +57,7 @@ class DefaultController extends Controller
         $form = $this->createFormBuilder($product, array('validation_groups' => 'add'))
             ->add('name', 'text', array('required' => false))
             ->add('price', 'integer', array('required' => false))
+            ->add('captcha', 'captcha', array('required' => false))
             ->add('save', 'submit')
             ->getForm();
         
@@ -89,6 +93,13 @@ class DefaultController extends Controller
 
     public function loginAction()
     {
+        $form = $this->createFormBuilder(new Admin())
+            ->add('username', 'text', array('required' => false))
+            ->add('password', 'password', array('required' => false))
+            ->add('captcha', 'captcha', array('required' => false))
+            ->add('submit', 'submit')
+            ->getForm();
+
         $helper = $this->get('security.authentication_utils');
         dump($helper->getLastAuthenticationError());
         return $this->render('AdminBundle:Default:login.html.twig', array(
@@ -96,6 +107,8 @@ class DefaultController extends Controller
             'last_username' => $helper->getLastUsername(),
             // last authentication error (if any)
             'error' => $helper->getLastAuthenticationError(),
+
+            'login_form' => $form->createView()
         ));    
     }
 

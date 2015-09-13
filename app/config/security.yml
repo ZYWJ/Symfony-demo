@@ -5,6 +5,10 @@ services:
         class: AdminBundle\Security\User\AdminProvider
     cpo.user_provider:
         class: AppBundle\Security\User\UserProvider
+    cs_user.login_listener:
+        class: AdminBundle\Security\User\LoginListener
+        tags:
+            - { name: kernel.event_listener, event: security.interactive_login }
 
 security:
     encoders:
@@ -35,7 +39,12 @@ security:
                 login_path: admin_login
                 check_path: admin_check
                 default_target_path: admin_admin
+                username_parameter: form[username]
+                password_parameter: form[password]
+
+                # csrf token options
                 csrf_provider: security.csrf.token_manager
+                csrf_parameter: _csrf_token
 
             logout:
                 path: admin_logout
